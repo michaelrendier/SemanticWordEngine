@@ -1,0 +1,5 @@
+# Required for hyperwebster.py (full engine)
+mpmath>=1.3.0
+nltk>=3.8.0
+
+# semantic_engine.py requires only the Python standard library
