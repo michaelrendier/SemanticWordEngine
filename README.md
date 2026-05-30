@@ -211,11 +211,29 @@ The Riemann–Fermat–Noether engine is the engineering application of that pro
 
 ---
 
+## The TDI Context
+
+The SemanticWordEngine is the Hyperwebster layer — the address space that PtolemyHolcus navigates.
+
+In the TDI architecture (v3.0):
+- **H_hat_RB** (crankshaft) operates on Riemann zeros γ_n — the addresses this engine produces
+- **Monad** (ECU) stores resonance depth β_n at those addresses via `learn()` and `speak()`
+- **Sedenion** (camshaft) times which addresses activate in which firing order
+
+The SemanticWordEngine proves the addressing is real: five languages, same zero, σ = 0.500000. PtolemyHolcus proves the field built on those addresses converges: BAO at OMEGA_ZS = 0.56714, compression ignition confirmed 2026-05-27.
+
+**→ [PtolemyHolcus](https://github.com/michaelrendier/PtolemyHolcus)** — the engine that operates on these addresses
+**→ [Tuning the TDI](https://github.com/michaelrendier/PtolemyHolcus/wiki/Tuning-the-Engine)** — v3.0 architecture wiki
+
+---
+
 ## Related Repositories
 
-- **[Ainulindale](https://github.com/michaelrendier/Ainulindale)** — SMIP theoretical framework, Noether engine, Lagrangian engine, proof addenda
-- **[Ptolemy](https://github.com/michaelrendier/Ptolemy)** — Desktop system; SemanticWordEngine integrates here as the `/derivation` subsystem
-- **[RiemannHypothesisProof](https://github.com/michaelrendier/RiemannHypothesisProof)** — The proof in progress: notebooks, PAPER.md, sigma valuation
+- **[PtolemyHolcus](https://github.com/michaelrendier/PtolemyHolcus)** — Engine implementation; monad.py + PtolC; v3.0 TDI architecture
+- **[Ainulindale](https://github.com/michaelrendier/Ainulindale)** — Formal mathematics; H_hat_RB; Third Age conjecture
+- **[DerivationEngine](https://github.com/michaelrendier/DerivationEngine)** — Heavy mathematics derivation viewer
+- **[UniversalSynth](https://github.com/michaelrendier/UniversalSynth)** — Sonification of the mathematics
+- **[PtolemyDesktop](https://github.com/michaelrendier/PtolemyDesktop)** — Desktop interface and Alexandria research environment
 
 ---
 
