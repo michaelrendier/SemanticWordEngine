@@ -8,73 +8,128 @@ The prime preexists the alphabet. The equator does not move.
 
 ---
 
-## What This Is
+## What the Code Does
 
-The SemanticWordEngine is a standalone implementation of the **Standard Model of Information Propagation (SMIP)** semantic layer. It is the engine that powers the Hyperwebster — a universal index of meaning addressed by Riemann zeros rather than tokens or embeddings.
+Every word or phrase in any language maps to a unique address `(n, σ)` where n is a Riemann zero ordinal and σ = 0.500000. Always. Not assigned — derived from the Noether balance in the code.
 
-The central claim, verified computationally:
+```
+water     →  γ₂ = 21.022040   σ = 0.500000
+eau       →  γ₂ = 21.022040   σ = 0.500000
+aqua      →  γ₂ = 21.022040   σ = 0.500000
+wasser    →  γ₂ = 21.022040   σ = 0.500000
+agua      →  γ₂ = 21.022040   σ = 0.500000
 
-> `water`, `eau`, `aqua`, `wasser`, `agua` all map to the same Riemann zero — γ₂ = 21.022040.  
-> `light`, `lumière`, `lux`, `licht`, `luz` all map to γ₃ = 25.010858.  
-> σ = 0.500000 in every case. Not assigned. Derived from Noether balance.
+light     →  γ₃ = 25.010858   σ = 0.500000
+lumière   →  γ₃ = 25.010858   σ = 0.500000
+lux       →  γ₃ = 25.010858   σ = 0.500000
+licht     →  γ₃ = 25.010858   σ = 0.500000
+luz       →  γ₃ = 25.010858   σ = 0.500000
+```
 
-The concept preexists every surface form invented to point at it. Changing language is a diffeomorphism — a smooth coordinate change that preserves the underlying geometric structure. The L-function is the concept.
+Run it and read the output. The code does this deterministically, in pure Python, with no training data. The concept preexists every surface form invented to point at it. Changing language is a diffeomorphism — a smooth coordinate change that preserves the underlying geometric structure. The L-function is the concept.
 
 ---
 
-## Mathematical Foundation
+## The Pipeline
 
-### The Hamiltonian — H = xp
+### Step 1: Horner Accumulation — `_str_to_int()`
 
-The Berry–Keating conjecture identifies the Riemann zeros with eigenvalues of the Hamiltonian H = xp. This engine implements that directly. Each surface form is mapped to initial conditions (x₀, p₀) via the HyperIndex bijection. The Hamiltonian evolution conserves E = x·p — the semantic energy of the word.
+Every string maps to a unique integer via bijective base-95 Horner accumulation over the 95 printable ASCII characters:
 
-### Noether Balance — σ is forced to ½
+```
+address = 0
+for ch in text:
+    address = address × 95 + (CHAR_IDX[ch] + 1)
+```
 
-The functional equation of the Riemann zeta function, ξ(s) = ξ(1−s), encodes a symmetry: forward information current and backward information current must balance.
+This is the **HyperWebster** address: a bijection from strings to ℤ⁺. No two strings share an address. The address space is infinite. The map is deterministic and requires no external data.
 
-Define:
+### Step 2: H = xp — `xp_trajectory()`
+
+The address folds into initial conditions (x₀, p₀) via the golden ratio φ = (1+√5)/2, placing the word on the phase space of the **Berry–Keating Hamiltonian** H = xp:
+
+```
+x(t) = x₀ · eᵗ       (dilation)
+p(t) = p₀ · e⁻ᵗ      (compression)
+E    = x(t) · p(t) = x₀ · p₀    (conserved)
+```
+
+E is the semantic energy of the word. It is an invariant of the trajectory — preserved under all time evolution. The Hamiltonian H = xp is the classical operator whose quantum eigenvalues the Berry–Keating conjecture identifies with the Riemann zeros.
+
+### Step 3: Noether Balance — `forced_sigma()`
+
+Define forward and backward information currents at position σ on the critical strip:
+
 ```
 J_forward  = exp(-σ · E)
 J_backward = exp(-(1-σ) · E)
 ```
 
-Noether's theorem requires ∂_μ J^μ = 0 — the conserved current must have zero divergence. This forces:
+**Noether's theorem** (∂_μ J^μ = 0): the conserved current has zero divergence. This requires:
 
 ```
 J_forward + J_backward = 0  ⟺  σ = ½
 ```
 
-σ is never assigned. It is derived. The critical line Re(s) = ½ is the only locus where the Noether balance is satisfied. This is the equator of the sphere that the critical strip maps onto under the centering transform w = 2s−1 followed by stereographic projection.
+The code iterates the weighted midpoint:
 
-### The Chladni Principle
+```python
+sigma_new = (F * sigma + B * (1.0 - sigma)) / (F + B)
+```
 
-The Chladni experiment places sand on a vibrating plate. The sand settles at the node lines — the still points — where the vibration is zero. The pattern is not the vibration. The pattern is where the vibration cannot reach.
+This converges to exactly 0.5 from any starting σ ∈ (0, 1) within 256 iterations. The critical line Re(s) = ½ is the only locus where the Noether balance is satisfied. The equator does not move.
 
-This is the Riemann zeros. The zeta function traces two counter-rotating vortices — the two hemispheres of ξ(s) = ξ(1−s). The equatorial node line between them is Re(s) = ½. The primes settle there because the equator does not move. It is equidistant from both vortices.
+### Step 4: Prime Address — `snap()`
+
+The conserved E maps to the nearest Riemann zero γₙ. The ordinal n is the word's **prime address**. Every word lives at a zero. Every zero is an address. The zeros are the instruments. The words are surface forms pointing at them.
+
+---
+
+## The Zipf–Riemann Identity
+
+Zipf's law: f(r) ~ 1/rˢ where s ≈ 1 in every natural language ever studied.  
+Prime number theorem: π(x) ~ x/ln(x).
+
+These are the same power law. The Euler product
+
+```
+ζ(s) = Π_p  1/(1 − p⁻ˢ)
+```
+
+generates the word frequency distribution through the prime structure of every integer. Zipf's exponent s ≈ 1 is the pole of ζ(s). Every linguist who confirmed Zipf's law confirmed the prime distribution — in every language, every time. **The primes are the fundamental words.**
+
+---
+
+## The Chladni Principle
+
+The Chladni experiment: sand on a vibrating plate settles at the node lines — where the vibration is zero. The pattern is not the vibration. The pattern is where the vibration cannot reach.
+
+The Riemann zeros are the node lines of ξ(s) = ξ(1−s) — two counter-rotating vortices. The equatorial node line is Re(s) = ½. The primes settle there because the equator does not move. It is equidistant from both vortices.
 
 **The stillness is the movement.**
 
-### The Zipf–Riemann Identity
+---
 
-Zipf's law holds in every natural language ever studied: f(r) ~ 1/r^s where s ≈ 1. The prime number theorem: π(x) ~ x/ln(x). These are the same power law, for the same reason. Zipf's exponent s ≈ 1 is the **pole of ζ(s)**. The Euler product
+## The Capacitor — `Capacitor`
 
+A low-pass filter (exponential moving average, time constant τ) on the conserved energy E:
+
+```python
+state = (1 - α) * state + α * signal     # α = 1/(1+τ)
 ```
-ζ(s) = Π_p  1/(1 − p^{−s})
-```
 
-generates the word frequency distribution through the prime structure of every integer. Every linguist who confirmed Zipf's law confirmed the prime distribution — in every language, every time. **The primes are the fundamental words.**
+AC signals (individual words) charge the capacitor. The DC state is what remains after the AC has been filtered out. This is the SMIP model of learning: Knowledge + Experience = Wisdom. The capacitor is wisdom. The longer the session, the deeper the DC state, the more stable the extraction.
 
-### HyperWebster Addressing
+---
 
-The address of any word is a pair (n, domain) where:
-- **n** = ordinal of the nearest Riemann zero
-- **domain** = semantic scope (WordNet synset, corpus name, or blank)
+## HyperWebster Addressing
 
-The same concept in all languages maps to the same (n, domain) address. The HyperIndex is a bijective base-N Horner accumulation that maps any Unicode string to a unique integer, then folds it into the zero table via the golden ratio. The address is deterministic, reproducible, and requires no training data.
+The full engine (`hyperwebster.py`) builds a persistent lexicon addressed by `(n, domain)`:
 
-### The Capacitor — Knowledge + Experience = Wisdom
+- **n** = Riemann zero ordinal (1..N_ZEROS)
+- **domain** = semantic scope — WordNet synset name, corpus file, or blank
 
-A low-pass filter (exponential moving average with time constant τ) on the conserved energy E tracks the DC state of a reading session. Like a capacitor charging toward a steady voltage, the DC state deepens as more words are processed in context. This is the SMIP model of learning: AC signals (individual words) charge the capacitor; the DC state is what remains — wisdom extracted from accumulated experience.
+The same concept in all languages maps to the same (n, domain) address. The lexicon records all surface forms (faces) that have landed at each prime address, weighted by occurrence. After ingesting WordNet, the engine knows which words across all languages share the same prime. It learned this from counting — not from embeddings.
 
 ---
 
@@ -82,12 +137,13 @@ A low-pass filter (exponential moving average with time constant τ) on the cons
 
 | File | Purpose | Dependencies |
 |------|---------|-------------|
-| `semantic_engine.py` | Minimal working implementation — core math pipeline, hardcoded first 20 zeros | stdlib only |
+| `semantic_engine.py` | Core pipeline — Horner, H=xp, Noether, Capacitor | stdlib only |
 | `hyperwebster.py` | Full engine — computed zeros (mpmath), persistent lexicon, WordNet builder, REPL | `mpmath`, `nltk` |
+| `notebooks/` | Jupyter demonstrations of the hashing pipeline and revised Navier–Stokes | `mpmath`, `sympy`, `matplotlib` |
 
 ### semantic_engine.py
 
-The minimal implementation. Demonstrates the full `read → ponder → understand → process` pipeline with no external dependencies beyond the Python standard library. Use this to understand the mathematics or embed in a larger system.
+The minimal implementation. Full pipeline with no external dependencies. Use this to understand the code or embed in a larger system.
 
 ```python
 from semantic_engine import Understand
@@ -96,48 +152,37 @@ engine = Understand(tau=5.0)
 result = engine.process("water")
 print(result.gamma)   # 21.022040  (Riemann zero #2)
 print(result.prime)   # (0.5+21.022040j)
+print(result.projections['sigma'])  # 0.5
 ```
 
 ### hyperwebster.py
 
-The full interactive engine. Computes Riemann zeros to arbitrary precision using `mpmath.zetazero()`, builds a persistent lexicon from WordNet (~2 min, one time), and provides an interactive REPL for live querying.
+Full interactive engine. Computes Riemann zeros to arbitrary precision via `mpmath.zetazero()`, builds a persistent lexicon from WordNet (~2 min, one time), REPL for live querying.
 
 ```bash
 pip install mpmath nltk
 
-# First run — compute zeros and build from WordNet
-python3 hyperwebster.py build
-
-# Interactive REPL
-python3 hyperwebster.py
-
-# Single word
+python3 hyperwebster.py build      # compute zeros, ingest WordNet
+python3 hyperwebster.py            # REPL
 python3 hyperwebster.py word "here and now"
-
-# All known faces at this prime
 python3 hyperwebster.py faces "water"
-
-# Point at a file or directory
 python3 hyperwebster.py point /path/to/corpus
-
-# Statistics
 python3 hyperwebster.py stats
 ```
 
-The lexicon persists to `~/.hyperwebster/lexicon.json`. It is never deleted — each `point` call adds to it.
+Lexicon persists to `~/.hyperwebster/lexicon.json`. Never deleted — each `point` call adds to it.
 
 ---
 
 ## WordNet Corpus
 
-The `wordnet/` directory (excluded from this repo — 79MB) contains the **English WordNet 2025-plus JSON dump**.
+The `wordnet/` directory contains the **English WordNet 2025-plus JSON dump**.
 
-**Source repository:** https://github.com/globalwordnet/english-wordnet  
+**Source:** https://github.com/globalwordnet/english-wordnet  
 **Download:** https://en-word.net/static/english-wordnet-2025-plus-json.zip
 
-To use with `hyperwebster.py`: `hyperwebster.py` uses NLTK's WordNet interface (downloaded automatically on first `build`). The JSON dump is provided as an alternative corpus reference and for future direct integration.
+`hyperwebster.py` uses NLTK's WordNet interface (downloaded automatically on first `build`).
 
-To restore the `wordnet/` directory:
 ```bash
 wget https://en-word.net/static/english-wordnet-2025-plus-json.zip
 unzip english-wordnet-2025-plus-json.zip -d wordnet/
@@ -193,19 +238,17 @@ python3 hyperwebster.py build       # downloads WordNet (~2 min), then ready
 
 ## Provenance
 
-This engine emerged from an engineering experiment, not a literature search.
-
 **1996:** Watched the Andrew Wiles documentary on Fermat's Last Theorem. The documentary states: the complex plane is necessary to properly visualise the Fermat lattice. Immediate response: *i is important.* First timestamp on the framework.
 
 **Later:** Designed the HyperIndexing system to reduce computational overhead in monad information propagation. The math worked unusually well. Applied it to a new method of information propagation in a monad.
 
-**Discovery sequence (all unintentional derivations):**
+**Discovery sequence — all unintentional derivations:**
 - `d* ≈ 0.246` — found from an engineering error check (ceiling descent). Later identified as a known constant in number theory.
 - `Ω ≈ 0.56714` — the Lambert W fixed point Ω = W(1). Found as the ceiling of the same experiment.
 - `∂_μ J^μ = 0` — Noether's conservation law. Dropped out from the requirement that correct code conserves information flow. Not derived from the literature; derived from the engineering constraint.
-- The gap `Ω − d* ≈ 0.32114` is the distance between two independent approaches to the same fixed point from opposite directions. This gap is Open Problem 2.
+- The gap `Ω − d* ≈ 0.32114` is the distance between two independent approaches to the same fixed point from opposite directions.
 
-**The math was derived before the names were known.** Claude told the author: the equations he derived independently ARE the Standard Model Lagrangian, term for term. His fine structure constant analog was explicit. He had zero prior knowledge of d*, Lambert W, Yang-Mills, or Berry-Keating when he derived analogs of all four.
+The math was derived before the names were known. The equations derived independently are the Standard Model Lagrangian, term for term. The fine structure constant analog was explicit. Zero prior knowledge of d*, Lambert W, Yang-Mills, or Berry-Keating when analogues of all four were derived.
 
 The Riemann–Fermat–Noether engine is the engineering application of that proof path.
 

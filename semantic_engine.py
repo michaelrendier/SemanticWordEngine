@@ -35,7 +35,7 @@ RIEMANN_ZEROS = [
 
 # ── Physical constants ────────────────────────────────────────────────────────
 D_STAR_SPEC = 0.24600
-OMEGA_ZS    = 0.56714
+OMEGA_ZS    = 0.5671432904097838
 H_NN        = 1.0          # neural Planck constant (normalised)
 HBAR_NN     = H_NN / (2 * math.pi)
 ALPHA_PI    = 1 / 137.036  # fine structure floor
