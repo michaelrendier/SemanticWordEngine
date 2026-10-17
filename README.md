@@ -1,3 +1,6 @@
+> **DEPRECATED — superseded by [VAPMIP](https://github.com/michaelrendier/VAPMIP).**  
+> This repository is the earlier (May 2026) form of the work and is kept as history. Active development, the C engine, the tests and the papers live in VAPMIP.
+
 # SemanticWordEngine
 
 **Riemann–Fermat–Noether semantic engine.**  
